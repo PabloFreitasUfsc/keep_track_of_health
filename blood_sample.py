@@ -85,23 +85,14 @@ def convert_pdf_to_txt(path):
 text = convert_pdf_to_txt(str(exam_test))
 
 
-# print(text.__len__())
-
 split_text = []
-# n  = 244
-# for index in range(0, len(text), n):
-#     split_text.append(text[index : index + n])
-step_size = 0
-aux_start_line = 0
-n_lines = 0
-for index in range(0, len(text)):
-    if text[index] == "\n":
-        n_lines = n_lines + 1
-        step_size = text.index(text[index])
-        split_text.append(text[aux_start_line:index])
-        # print(index)
-        aux_start_line = aux_start_line + step_size
+loc_line = ""
 
-for element in split_text:
-    print(element)
-    # break
+for index in range(0, len(text)):
+    if "\n" in text[index]:
+        split_text.append(loc_line)
+        loc_line = ""
+    loc_line = loc_line + (text[index])
+
+for line in split_text:
+    print(line)
