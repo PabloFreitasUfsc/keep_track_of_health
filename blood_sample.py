@@ -20,35 +20,15 @@ __status__ = "Prototype"
 # =============================================================================
 
 from pathlib import Path
-import pdfminer
-
-
-# Load your PDF"
-
-sample_file_path = Path(__file__).absolute().parent.joinpath("samples")
-exam_test = Path(sample_file_path).joinpath("exames_test.pdf")
-
-# #opening method will be rb
-# pdf_obj = open(exam_test, "rb")
-
-# #create reader variable that will read the pdffileobj
-# pdf_reader = PyPDF2.PdfFileReader(pdf_obj)
-# x = 0
-
-# #create a variable that will select the selected number of pages
-# page_obj=pdf_reader.getPage(1)
-
-# #(x+1) because python indentation starts with 0.
-# #create text variable which will store all text datafrom pdf file
-# text=page_obj.extractText()
-
-# print(text)
+import sys
 
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from io import StringIO
+
+import data_from_text as t2d
 
 
 def convert_pdf_to_txt(path):
@@ -79,20 +59,35 @@ def convert_pdf_to_txt(path):
     fp.close()
     device.close()
     retstr.close()
-    return text
+
+    split_text = []
+    loc_line = ""
+
+    for index in range(0, len(text)):
+        if "\n" in text[index]:
+            split_text.append(loc_line)
+            loc_line = ""
+        loc_line = loc_line + (text[index])
+
+    return split_text
 
 
-text = convert_pdf_to_txt(str(exam_test))
+def display_test(text):
+    """"""
+    for line in text:
+        print(line)
 
 
-split_text = []
-loc_line = ""
+def main():
+    """"""
+    # Paths
+    sample_file_path = Path(__file__).absolute().parent.joinpath("samples")
+    exam_test = Path(sample_file_path).joinpath("exames_test.pdf")
 
-for index in range(0, len(text)):
-    if "\n" in text[index]:
-        split_text.append(loc_line)
-        loc_line = ""
-    loc_line = loc_line + (text[index])
+    text = convert_pdf_to_txt(exam_test)
 
-for line in split_text:
-    print(line)
+    t2d.ExamData(text)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
