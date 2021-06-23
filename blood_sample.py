@@ -28,7 +28,7 @@ from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from io import StringIO
 
-import data_from_text as t2d
+import data_from_text as text2data
 
 
 def convert_pdf_to_txt(path):
@@ -86,7 +86,7 @@ def main():
 
     text = convert_pdf_to_txt(exam_test)
 
-    t2d.ExamData(text)
+    text2data.ExamData(text)
 
 
 if __name__ == "__main__":

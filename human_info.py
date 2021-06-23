@@ -21,9 +21,15 @@ __status__ = "Prototype"
 
 
 class PatientInfo:
-    """"""
-
-    def __int__(self, name, age, health_plan, doctor, protocol, date):
+    def __init__(
+        self,
+        name=None,
+        age=None,
+        health_plan=None,
+        doctor=None,
+        protocol=None,
+        date=None,
+    ):
         """"""
         self.name = name
         self.age = age
