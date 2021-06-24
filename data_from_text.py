@@ -21,7 +21,9 @@ __status__ = "Prototype"
 import unidecode
 from human_info import PatientInfo
 import blood_info
+from blood_info import CellInfo
 import re
+from typing import Union, Any
 
 
 class ExamData:
@@ -31,6 +33,7 @@ class ExamData:
         """"""
         self.text = text
         self.PatientInfo_obj = None
+        self.blood_info_list: Union[CellInfo, Any] = []
         self.set_patient_info()
         self.set_blood_info()
 
@@ -59,11 +62,15 @@ class ExamData:
         for line in self.text:
             for cell_elem in blood_info.blood_data_tags:
                 if cell_elem in line:
-                    print("line: %s\t numbers %s " % (line, self.number_info(line)))
+                    loc_cell_info_obj = self.number_info(line, cell_elem)
+                    if loc_cell_info_obj:
+                        self.blood_info_list.append(loc_cell_info_obj)
                     break
 
+        print(self.blood_info_list)
+
     @staticmethod
-    def number_info(line):
+    def number_info(line, name):
         """
         Receives a line and will search for "integer" or "float" numbers in this line and return
         reference: https://docs.python.org/3/library/re.html
@@ -73,22 +80,44 @@ class ExamData:
         """
         numbers = []
 
-        loc_number_with_unit = re.search(
-            "\d+\,\d+\s\w+\/\w+ | \d+\,\d+\s\w+ | \d+\s\w+ | \d+\s\w+\d | \d+\,\d+\s\/\w+ | \d+\s\/\w+ | \d+\s\w+\/\w+",
+        loc_integer_with_unit = re.search(
+            r"(\s\d+\s)(\/\w+) | (\s\d+\s)(\w+)|(\s\d+\s)(\w+\d)|(\s\d+\s)(\w+\/\w+)",
             line,
         )  # 00,00 xX/xX         | 00 xX/xX      | 00,00 xX      | 00 xX    | 00 xX0     | 00,00 /xX       | 00 /xX
-        loc_porcent = re.search("\d+\,\d+\s\% | \d+\s\%", line)
+        loc_porcent = re.search(r"(\d+\,\d+\s)(\%) | (\d+\s)(\%)", line)
 
-        loc_alone_numbers = re.search("\d+\s | \d+\,\d+\s", line)
+        loc_alone_numbers = re.search(r"(\d+\s) | (\d+\,\d+\s) | (\d+\s+\d+\s)", line)
 
-        if loc_number_with_unit:  # 00,00 unit/unit
-            print(loc_number_with_unit)
+        loc_float_with_unit = re.search(
+            r"(\d+\,\d+\s)(\w+\/\w+)|(\d+\,\d+\s)(\/\w+)", line
+        )
+
+        if loc_integer_with_unit:  # 00,00 unit/unit
+            return blood_info.CellInfo(
+                name=name,
+                value=loc_integer_with_unit.group(1),
+                unit=loc_integer_with_unit.group(2),
+            )
+        elif loc_float_with_unit:
+            return blood_info.CellInfo(
+                name=name,
+                value=loc_float_with_unit.group(1),
+                unit=loc_float_with_unit.group(2),
+            )
         elif loc_porcent:
-            print(loc_porcent)
+            return blood_info.CellInfo(
+                name=name,
+                value=loc_porcent.group(1),
+                unit=loc_porcent.group(2),
+            )
         elif loc_alone_numbers:
-            print(loc_alone_numbers)
-
-        return numbers
+            return blood_info.CellInfo(
+                name=name,
+                value=loc_alone_numbers.group(1),
+                unit=loc_alone_numbers.group(2),
+            )
+        else:
+            return None
 
     def search_str(self, sub_str):
         for line in self.text:
