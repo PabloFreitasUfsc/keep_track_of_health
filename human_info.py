@@ -37,3 +37,23 @@ class PatientInfo:
         self.doctor = doctor
         self.protocol = protocol
         self.date = date
+
+    def get_name(self) -> str:
+        if self.name is not None:
+            return self.name.replace(" ", "_")
+
+    def get_age(self) -> int:
+        if self.age is not None:
+            return int(self.age.replace(" ", ""))
+
+    def get_date(self) -> str:
+        if self.date is not None:
+            return self.date.replace("/", "_")
+
+    def get_health_plan(self) -> str:
+        if self.health_plan is not None:
+            return self.health_plan
+
+    def get_doctor(self) -> str:
+        if self.doctor is not None:
+            return self.doctor

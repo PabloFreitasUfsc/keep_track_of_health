@@ -26,6 +26,20 @@ class CellInfo:
         self.value = value
         self.unit = unit
 
+    def get_name(self):
+        if self.name is not None:
+            return self.name.replace(" ", "")
+
+    def get_value(self):
+        if self.value is not None:
+            return float(
+                self.value.replace(" ", "").replace(",", ".")
+            )  # Be careful witht the , and the .
+
+    def get_unit(self):
+        if self.unit is not None:
+            return self.unit.replace(" ", "")
+
 
 class ExamTypeInfo:
     def __init__(self) -> None:

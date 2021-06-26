@@ -86,7 +86,8 @@ def main():
 
     text = convert_pdf_to_txt(exam_test)
 
-    text2data.ExamData(text)
+    exam_data_obj = text2data.ExamData(text)
+    text2data.HealthDataBase(exam_data_obj)
 
 
 if __name__ == "__main__":
