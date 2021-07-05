@@ -1,10 +1,10 @@
 # keep_track_of_health
-[![setup-python Actions Status](https://github.com/PabloFreitasUfsc/keep_track_of_health/tree/task/prototype/.github/workflows/python_package/badge.svg)](https://github.com/PabloFreitasUfsc/keep_track_of_health/actions)
+[![setup-python@v2 Actions Status](https://github.com/PabloFreitasUfsc/keep_track_of_health/tree/task/prototype/.github/workflows/python_package/badge.svg)](https://github.com/PabloFreitasUfsc/keep_track_of_health/actions)
 
-[![Python package Actions status](https://github.com/PabloFreitasUfsc/keep_track_of_health/tree/task/prototype/.github/workflows/python_package/badge.svg)](https://github.com/PabloFreitasUfsc/keep_track_of_health/actions)
+[![checkout@v2 Actions status](https://github.com/PabloFreitasUfsc/keep_track_of_health/tree/task/prototype/.github/workflows/python_package/badge.svg)](https://github.com/PabloFreitasUfsc/keep_track_of_health/actions)
 
 <p align="left">
-  <a href="https://github.com/actions/setup-python"><img alt="GitHub Actions status" src="https://github.com/PabloFreitasUfsc/keep_track_of_health/tree/task/prototype/.github/workflows/python_package/badge.svg"></a>
+  <a href="https://github.com/PabloFreitasUfsc/keep_track_of_health/actions"><img alt="setup-python@v2 Actions status" src="https://github.com/PabloFreitasUfsc/keep_track_of_health/tree/task/prototype/.github/workflows/python_package/badge.svg"></a>
 </p>
 
 
