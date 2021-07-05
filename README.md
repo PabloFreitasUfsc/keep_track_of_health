@@ -1,5 +1,7 @@
 # keep_track_of_health
-[![Python package Actions Status](https://github.com/PabloFreitasUfsc/keep_track_of_health/tree/task/prototype/.github/workflows/python-package.yml/badge.svg)](https://github.com/PabloFreitasUfsc/keep_track_of_health/actions)
+[![Python package Actions Status](https://github.com/PabloFreitasUfsc/keep_track_of_health/tree/task/prototype/.github/workflows/python_package/badge.svg)](https://github.com/PabloFreitasUfsc/keep_track_of_health/actions)
+
+[![Python package Actions status](https://github.com/PabloFreitasUfsc/keep_track_of_health/tree/task/prototype/.github/workflows/python_package/badge.svg)](https://github.com/PabloFreitasUfsc/keep_track_of_health/actions)
 
 Personal project to keep track of health exams and evaluate them with mathematical tools.
 
