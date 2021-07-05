@@ -1,5 +1,5 @@
 # keep_track_of_health
-[![setup-python@v2 Actions Status](https://github.com/PabloFreitasUfsc/keep_track_of_health/tree/task/prototype/.github/workflows/setup-python@v2/badge.svg)](https://github.com/PabloFreitasUfsc/keep_track_of_health/actions)
+[![setup-python@v2 Actions Status](https://img.shields.io/github/workflow/status/PabloFreitasUfsc/keep_track_of_health/python_package)](https://github.com/PabloFreitasUfsc/keep_track_of_health/actions)
 
 [![checkout@v2 Actions status](https://github.com/PabloFreitasUfsc/keep_track_of_health/tree/task/prototype/.github/workflows/checkout@v2/badge.svg)](https://github.com/PabloFreitasUfsc/keep_track_of_health/actions)
 
