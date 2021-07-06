@@ -107,17 +107,7 @@ class ExamData:
         )
 
         if loc_integer_with_unit:  # 00,00 unit/unit
-            # print(line)
-            # print(loc_integer_with_unit)
-            # print(loc_integer_with_unit.groups().__len__())
-            # for i in range(1, loc_integer_with_unit.groups().__len__() + 1):
-            #     if loc_integer_with_unit.group(i) is not None:
-            #         loc_value = loc_integer_with_unit.group(i)
-            #         if loc_integer_with_unit.group(i + 1) is not None:
-            #             loc_unit = loc_integer_with_unit.group(i + 1)
-
             loc_value_unit = self.check_value_unit_group(loc_integer_with_unit)
-            # print(loc_integer_with_unit.groups())
             return blood_info.CellInfo(
                 name=name,
                 value=loc_value_unit[0],
@@ -125,7 +115,6 @@ class ExamData:
             )
         elif loc_float_with_unit:
             loc_value_unit = self.check_value_unit_group(loc_float_with_unit)
-            # print(loc_float_with_unit.groups())
             return blood_info.CellInfo(
                 name=name,
                 value=loc_value_unit[0],
@@ -133,15 +122,12 @@ class ExamData:
             )
         elif loc_porcent:
             loc_value_unit = self.check_value_unit_group(loc_porcent)
-            # print(loc_porcent.groups())
             return blood_info.CellInfo(
                 name=name,
                 value=loc_value_unit[0],
                 unit=loc_value_unit[1],
             )
         elif loc_alone_numbers:
-            # loc_value_unit = self.check_value_unit_group(loc_alone_numbers)
-            # print(loc_alone_numbers.groups())
             return blood_info.CellInfo(
                 name=name,
                 value=loc_alone_numbers.group(),  # TODO avaliate this value 00    00 what to do?
@@ -173,11 +159,16 @@ class HealthDataBase:
 
         collection_name = self.patient_obj.get_name()
         collection_date = self.patient_obj.get_date()
-        self.patient_collection = self.health_db[
+        # Just put one database with the same name
+        if not (
             collection_name + "_" + collection_date
-        ]
+            in self.health_db.list_collection_names()
+        ):
+            self.patient_collection = self.health_db[
+                collection_name + "_" + collection_date
+            ]
 
-        self.load_data()
+            self.load_data()
 
     def load_data(self):
         """"""

@@ -18,27 +18,50 @@ __status__ = "Prototype"
 # =============================================================================
 # Imports
 # =============================================================================
+import colorama
+
+
+def warning_text(text):
+    """"""
+    print(colorama.Fore.YELLOW + text + colorama.Style.RESET_ALL)
+
+
+def error_text(text):
+    """"""
+    print(colorama.Fore.RED + colorama.Back.GREEN + text + colorama.Style.RESET_ALL)
 
 
 class CellInfo:
     def __init__(self, name="default", value="0.0", unit="None") -> None:
         self.name = name
         self.value = value
-        self.unit = unit
+        self.unit = unit  # TODO treat with pint maybe
 
     def get_name(self):
         if self.name is not None:
             return self.name.replace(" ", "")
+        else:
+            warning_text("Name missing.")
+            return None
 
     def get_value(self):
         if self.value is not None:
             return float(
                 self.value.replace(" ", "").replace(",", ".")
             )  # Be careful witht the , and the .
+        else:
+            warning_text(
+                "Missing value definition, CellInfo.value = %s." % self.get_value()
+            )
 
     def get_unit(self):
         if self.unit is not None:
             return self.unit.replace(" ", "")
+        else:
+            warning_text(
+                "Missing unit definition, CellInfo.name = %s." % self.get_name()
+            )
+            return None
 
 
 class ExamTypeInfo:
